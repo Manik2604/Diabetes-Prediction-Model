@@ -38,7 +38,7 @@ interface = gr.Interface(
 <h2 style="color:blue;">Developed by <span style="color:red;">Manik</span></h2>
 
 <p>
-Hello! I'm <strong>Manik</strong>. This project demonstrates how a Decision Tree
+Hello! I am <strong>Manik</strong>. This project demonstrates how a Decision Tree
 Machine Learning model can predict diabetes risk based on patient health metrics.
 The application provides a quick assessment and showcases the use of machine
 learning in healthcare.
