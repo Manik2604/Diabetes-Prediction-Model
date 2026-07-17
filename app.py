@@ -140,7 +140,7 @@ https://github.com/Manik2604/Diabetes-Prediction-Model
 
 ## 📋 Instructions
 1. Clone the repository
-   git clone https://github.com/Manya2507/Diabetes-Prediction-Model.git
+   git clone https://github.com/Manik2604/Diabetes-Prediction-Model.git
 2. Install dependencies
    pip install gradio scikit-learn pandas numpy joblib
 3. Make sure the file diabetes_prediction_model1.pkl is present in the project folder.
