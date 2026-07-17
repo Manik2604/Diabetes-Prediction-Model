@@ -32,17 +32,12 @@ interface = gr.Interface(
     ],
     outputs=gr.Text(label="Assessment Result"),
     title="Diabetes Prediction System",
-    description="Project by Manik medical metrics to predict diabetes risk using a Decision Tree Machine Learning model."
+    description="""
+    <h3> Project by Manik - PIET (241318)</h3>
+    <p>Enter the medical metrics to predict diabetes risk using a Decision Tree Machine Learning model.</p>
+    """
 )
 
-<h2 style="color:blue;">Developed by <span style="color:red;">Manik</span></h2>
-
-<p>
-Hello! I am <strong>Manik</strong>. This project demonstrates how a Decision Tree
-Machine Learning model can predict diabetes risk based on patient health metrics.
-The application provides a quick assessment and showcases the use of machine
-learning in healthcare.
-</p>
 # ------------------------------------------
 
 if __name__ == "__main__":
