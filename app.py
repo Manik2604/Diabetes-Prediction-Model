@@ -8,7 +8,7 @@ import gradio as gr
 # Load the trained model
 # ==========================================================
 try:
-    deployed_dt = joblib.load("diabetes_prediction_model1.pkl")
+    deployed_dt = joblib.load("Diabetes_Prediction_model.pkl")
 except Exception as e:
     print(f"Warning: Model not found or error loading. {e}")
     deployed_dt = None
