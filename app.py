@@ -185,11 +185,12 @@ interface = gr.Interface(
 # ==========================================================
 # Launch
 # ==========================================================
-if _name_ == "_main_":
+if __name__ == "__main__":
     interface.launch(
         server_name="0.0.0.0",
         server_port=int(os.environ.get("PORT", 7860)),
-    )import os
+    )
+import os
 import gradio as gr
 import joblib
 
