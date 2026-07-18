@@ -140,7 +140,7 @@ https://github.com/Manik2604/Diabetes-Prediction-Model
 
 ## 📋 Instructions
 1. Clone the repository
-   `git clone https://github.com/Manya2507/Diabetes-Prediction-Model.git`
+   `git clone https://github.com/Manik2604/Diabetes-Prediction-Model.git`
 2. Install dependencies
    `pip install gradio scikit-learn pandas numpy joblib`
 3. Make sure the file `Diabetes_Prediction_model.pkl` is present in the project folder.
@@ -177,7 +177,7 @@ interface = gr.Interface(
         label="Assessment Result",
         lines=6,
     ),
-    title="🩺 Diabetes Prediction System",
+    title="🩺 Diabetes Prediction Model",
     description=DESCRIPTION,
 )
 # ------------------------------------------
