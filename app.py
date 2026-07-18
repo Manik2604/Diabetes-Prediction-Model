@@ -1,16 +1,17 @@
+# app.py
+
 import os
 import joblib
 import gradio as gr
 
 # ==========================================================
-# Load Trained Model
+# Load the trained model
 # ==========================================================
 try:
     deployed_dt = joblib.load("Diabetes_Prediction_model.pkl")
 except Exception as e:
-    print(f"Error loading model: {e}")
+    print(f"Warning: Model not found or error loading. {e}")
     deployed_dt = None
-
 
 # ==========================================================
 # Prediction Function
@@ -24,6 +25,7 @@ def predict_diabetes(
     BMI,
     Age,
 ):
+
     values = [
         Pregnancies,
         PlasmaGlucose,
@@ -34,9 +36,9 @@ def predict_diabetes(
         Age,
     ]
 
-    # Empty input validation
-    if any(v is None for v in values):
-        return "❌ Please fill in all input fields."
+    # Empty input check
+    if any(v is None or str(v).strip() == "" for v in values):
+        return "❌ Please fill in all the input fields."
 
     # Convert data types
     try:
@@ -47,49 +49,27 @@ def predict_diabetes(
         SerumInsulin = float(SerumInsulin)
         BMI = float(BMI)
         Age = int(Age)
-
-    except ValueError:
+    except (ValueError, TypeError):
         return "❌ Please enter valid numeric values."
 
-    # Negative value validation
-    if any(
-        x < 0
-        for x in [
-            Pregnancies,
-            PlasmaGlucose,
-            DiastolicBloodPressure,
-            TricepsThickness,
-            SerumInsulin,
-            BMI,
-            Age,
-        ]
-    ):
+    # Negative value check
+    if any(v < 0 for v in [
+        Pregnancies, PlasmaGlucose, DiastolicBloodPressure, 
+        TricepsThickness, SerumInsulin, BMI, Age
+    ]):
         return "❌ Negative values are not allowed."
 
     # Range validation
-    if Pregnancies > 20:
-        return "❌ Pregnancies must be between 0 and 20."
-
-    if PlasmaGlucose > 300:
-        return "❌ Plasma Glucose must be between 0 and 300."
-
-    if DiastolicBloodPressure > 200:
-        return "❌ Blood Pressure must be between 0 and 200."
-
-    if TricepsThickness > 100:
-        return "❌ Triceps Thickness must be between 0 and 100."
-
-    if SerumInsulin > 1000:
-        return "❌ Serum Insulin must be between 0 and 1000."
-
-    if BMI > 70:
-        return "❌ BMI must be between 0 and 70."
-
-    if Age > 120:
-        return "❌ Age must be between 0 and 120."
+    if Pregnancies > 20: return "❌ Pregnancies should be between 0 and 20."
+    if PlasmaGlucose > 300: return "❌ Plasma Glucose should be between 0 and 300."
+    if DiastolicBloodPressure > 200: return "❌ Blood Pressure should be between 0 and 200."
+    if TricepsThickness > 100: return "❌ Triceps Thickness should be between 0 and 100."
+    if SerumInsulin > 1000: return "❌ Serum Insulin should be between 0 and 1000."
+    if BMI > 70: return "❌ BMI should be between 0 and 70."
+    if Age > 120: return "❌ Age should be between 0 and 120."
 
     if deployed_dt is None:
-        return "❌ Model failed to load."
+        return "❌ Model failed to load. Please check your .pkl file."
 
     try:
         input_data = [[
@@ -118,8 +98,7 @@ def predict_diabetes(
             )
 
     except Exception as e:
-        return f"❌ Prediction Failed\n\nError: {e}"
-
+        return f"❌ Prediction failed.\n\nError: {str(e)}"
 
 # ==========================================================
 # Description
@@ -127,41 +106,70 @@ def predict_diabetes(
 DESCRIPTION = """
 # 🩺 Diabetes Prediction System
 
-This application predicts whether a patient is at **High Risk** or **Low Risk**
-of Diabetes using a trained **Decision Tree Machine Learning Model**.
+This application predicts whether a patient is at **High Risk** or **Low Risk** of Diabetes using a trained **Decision Tree Machine Learning Model**.
 
 ---
 
-### 👨‍💻 Developed By
+## 👩‍💻 Developed By
 **Manik**
 
-### 🏫 College
-Panipat Institute of Engineering & Technology (PIET)
+---
 
-### 🛠 Technologies
-- Python
-- Scikit-learn
-- Decision Tree
-- Pandas
-- NumPy
-- Joblib
-- Gradio
+## 🏫 College
+**Panipat Institute of Engineering & Technology (PIET), Panipat**
 
-Enter the patient details and click **Submit**.
+---
+
+## 🔗 GitHub Repository
+https://github.com/Manik2604/Diabetes-Prediction-Model
+
+---
+
+## 🛠️ Tools & Technologies
+* Python
+* Machine Learning
+* Decision Tree Classifier
+* Scikit-learn
+* Pandas
+* NumPy
+* Joblib
+* Gradio
+* Git & GitHub
+
+---
+
+## 📋 Instructions
+1. Clone the repository
+   `git clone https://github.com/Manya2507/Diabetes-Prediction-Model.git`
+2. Install dependencies
+   `pip install gradio scikit-learn pandas numpy joblib`
+3. Make sure the file `Diabetes_Prediction_model.pkl` is present in the project folder.
+4. Run `python app.py`
+
+---
+
+## 📌 Input Parameters
+* Pregnancies
+* Plasma Glucose
+* Diastolic Blood Pressure
+* Triceps Skin Fold Thickness
+* Serum Insulin
+* Body Mass Index (BMI)
+* Age
 """
 
-
 # ==========================================================
-# Gradio Interface
+# Interface
 # ==========================================================
+# --- CODE BLOCK: REMOVED ALLOW_FLAGGING ---
 interface = gr.Interface(
     fn=predict_diabetes,
     inputs=[
         gr.Number(label="Pregnancies"),
-        gr.Number(label="Plasma Glucose (mg/dL)"),
-        gr.Number(label="Diastolic Blood Pressure (mm Hg)"),
-        gr.Number(label="Triceps Skin Fold Thickness (mm)"),
-        gr.Number(label="Serum Insulin (mu U/mL)"),
+        gr.Number(label="Plasma Glucose"),
+        gr.Number(label="Diastolic Blood Pressure"),
+        gr.Number(label="Triceps Skin Fold Thickness"),
+        gr.Number(label="Serum Insulin"),
         gr.Number(label="Body Mass Index (BMI)"),
         gr.Number(label="Age"),
     ],
@@ -172,10 +180,10 @@ interface = gr.Interface(
     title="🩺 Diabetes Prediction System",
     description=DESCRIPTION,
 )
-
+# ------------------------------------------
 
 # ==========================================================
-# Launch App
+# Launch
 # ==========================================================
 if __name__ == "__main__":
     interface.launch(
