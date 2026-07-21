@@ -118,10 +118,6 @@ This application predicts whether a patient is at **High Risk** or **Low Risk** 
 ## 🏫 College
 **Panipat Institute of Engineering & Technology (PIET), Panipat**
 
----
-
-## 🔗 GitHub Repository
-https://github.com/Manik2604/Diabetes-Prediction-Model
 
 ---
 
@@ -140,10 +136,10 @@ https://github.com/Manik2604/Diabetes-Prediction-Model
 
 ## 📋 Instructions
 1. Clone the repository
-   `git clone https://github.com/Manik2604/Diabetes-Prediction-Model.git`
+   `git clone https://github.com/Manya2507/Diabetes-Prediction-Model.git`
 2. Install dependencies
    `pip install gradio scikit-learn pandas numpy joblib`
-3. Make sure the file `Diabetes_Prediction_model.pkl` is present in the project folder.
+3. Make sure the file `diabetes_prediction_model1.pkl` is present in the project folder.
 4. Run `python app.py`
 
 ---
@@ -177,7 +173,7 @@ interface = gr.Interface(
         label="Assessment Result",
         lines=6,
     ),
-    title="🩺 Diabetes Prediction Model",
+    title="🩺 Diabetes Prediction System",
     description=DESCRIPTION,
 )
 # ------------------------------------------
